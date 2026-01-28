@@ -32,10 +32,7 @@ export default function RootLayout({
         <Providers>
           <AnimatedBackground />
           <Navbar />
-          <main 
-            className="relative pt-24 flex flex-col"
-            style={{ minHeight: 'calc(100vw * 2.49)' }}
-          >
+          <main className="relative pt-24 flex flex-col main-content">
             {children}
           </main>
         </Providers>
