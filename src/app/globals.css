@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #87CEEB;
+  --foreground: #1e293b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  /* Match the sky blue at top of background image */
+  background: linear-gradient(to bottom, #87CEEB 0%, #87CEEB 50%, #f5faff 100%);
+  scroll-behavior: smooth;
+  /* Prevent overscroll bounce on supported browsers */
+  overscroll-behavior: none;
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  /* Prevent overscroll bounce */
+  overscroll-behavior: none;
+}
+
+/* Libre Baskerville font for headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-libre-baskerville), serif;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Custom scrollbar - matches emerald-500 button color */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
 }
