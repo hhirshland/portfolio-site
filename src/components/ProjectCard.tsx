@@ -24,7 +24,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       viewport={{ once: true }}
     >
       <button onClick={handleClick} className="w-full text-left">
-        <div className="group relative bg-white/40 backdrop-blur-sm rounded-3xl border border-white/50 shadow-lg shadow-emerald-900/5 hover:shadow-xl hover:shadow-emerald-900/10 transition-all duration-300 hover:-translate-y-1">
+        <div className="group relative bg-white/70 backdrop-blur-sm rounded-3xl border border-white/50 shadow-lg shadow-emerald-900/5 hover:shadow-xl hover:shadow-emerald-900/10 transition-all duration-300 hover:-translate-y-1">
           {/* Thumbnail with padding and rounded corners */}
           <div className="p-4 pb-0">
             <div className="aspect-square relative overflow-hidden rounded-2xl">

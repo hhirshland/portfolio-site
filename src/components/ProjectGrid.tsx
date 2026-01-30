@@ -31,8 +31,7 @@ export default function ProjectGrid({ projects, showViewAll = false }: ProjectGr
             Featured Projects
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
-            A collection of projects I&apos;ve worked on. Each one taught me something new
-            and pushed me to grow as a developer.
+            A collection of projects I&apos;ve worked on as a PM or Product Engineer.
           </p>
         </motion.div>
         

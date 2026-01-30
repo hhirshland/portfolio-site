@@ -1,5 +1,7 @@
 import Hero from "@/components/Hero";
 import ProjectGrid from "@/components/ProjectGrid";
+import Toolkit from "@/components/Toolkit";
+import StockTicker from "@/components/StockTicker";
 import { getFeaturedProjects } from "@/data/projects";
 
 export default function Home() {
@@ -16,7 +18,7 @@ export default function Home() {
         <section id="about" className="py-20 px-6">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/50 shadow-lg shadow-emerald-900/5">
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6 text-center">
                 About Me
               </h2>
               <div className="prose prose-slate max-w-none">
@@ -36,7 +38,12 @@ export default function Home() {
             </div>
           </div>
         </section>
+        
+        <Toolkit />
       </div>
+      
+      {/* Stock Ticker */}
+      <StockTicker />
       
       {/* Footer - pushed to bottom */}
       <footer className="py-12 px-6 mt-auto">
