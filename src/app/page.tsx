@@ -1,18 +1,21 @@
 import Hero from "@/components/Hero";
 import ProjectGrid from "@/components/ProjectGrid";
+import CaseStudyGrid from "@/components/CaseStudyGrid";
 import Toolkit from "@/components/Toolkit";
 import StockTicker from "@/components/StockTicker";
 import { getFeaturedProjects } from "@/data/projects";
+import { getFeaturedCaseStudies } from "@/data/caseStudies";
 
 export default function Home() {
   const featuredProjects = getFeaturedProjects();
+  const featuredCaseStudies = getFeaturedCaseStudies();
 
   return (
     <>
       {/* Main content - grows to fill space */}
       <div className="flex-grow">
         <Hero />
-        <ProjectGrid projects={featuredProjects} showViewAll={true} />
+        <CaseStudyGrid caseStudies={featuredCaseStudies} />
         
         {/* About Section */}
         <section id="about" className="py-20 px-6">
@@ -27,7 +30,7 @@ export default function Home() {
                     
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                  I always enjoy building (or investing in) new things, and experimenting with new technologies. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
+                  I enjoy building (or investing in) new things, and experimenting with new technologies. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
                 When I&apos;m unplugged, you can find me playing golf, tennis, skiing, hiking, playing poker or catan, cooking, exercising, reading a sci-fi book, or watching the Patriots.
@@ -39,6 +42,7 @@ export default function Home() {
           </div>
         </section>
         
+        <ProjectGrid projects={featuredProjects} showViewAll={true} />
         <Toolkit />
       </div>
       
