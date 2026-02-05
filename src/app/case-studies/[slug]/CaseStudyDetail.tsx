@@ -165,10 +165,20 @@ export default function CaseStudyDetail({ caseStudy }: CaseStudyDetailProps) {
               // Strategy items with em-dash are key points
               if (item.includes("—")) {
                 const [title, description] = item.split("—");
+                const itemNumber = caseStudy.strategy.filter((s, i) => i > 0 && i <= idx && s.includes("—")).length;
                 return (
-                  <div key={idx} className="bg-emerald-50/50 rounded-xl p-4 border border-emerald-100">
-                    <p className="font-semibold text-slate-800">{title.trim()}</p>
-                    <p className="text-slate-600 text-sm mt-1">{description.trim()}</p>
+                  <div key={idx} className="bg-slate-50/50 rounded-xl p-6 border border-slate-100">
+                    <div className="flex items-start gap-4">
+                      <span className="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center text-sm font-bold flex-shrink-0">
+                        {itemNumber}
+                      </span>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-slate-800 mb-1">
+                          {title.trim()}
+                        </h3>
+                        <p className="text-slate-600">{description.trim()}</p>
+                      </div>
+                    </div>
                   </div>
                 );
               }

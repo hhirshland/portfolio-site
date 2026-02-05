@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import ProjectGrid from "@/components/ProjectGrid";
-import CaseStudyGrid from "@/components/CaseStudyGrid";
+import CaseStudyCarousel from "@/components/CaseStudyCarousel";
+// import CaseStudyTimeline from "@/components/CaseStudyTimeline";
 import Toolkit from "@/components/Toolkit";
 import StockTicker from "@/components/StockTicker";
 import { getFeaturedProjects } from "@/data/projects";
@@ -15,7 +16,10 @@ export default function Home() {
       {/* Main content - grows to fill space */}
       <div className="flex-grow">
         <Hero />
-        <CaseStudyGrid caseStudies={featuredCaseStudies} />
+        
+        {/* Case Study Options for comparison */}
+        <CaseStudyCarousel caseStudies={featuredCaseStudies} />
+        {/* <CaseStudyTimeline caseStudies={featuredCaseStudies} /> */}
         
         {/* About Section */}
         <section id="about" className="py-20 px-6">

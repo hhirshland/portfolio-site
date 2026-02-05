@@ -119,6 +119,87 @@ export const caseStudies: CaseStudy[] = [
     ],
     featured: true,
   },
+  {
+    slug: "dimo-business-model",
+    company: "DIMO",
+    role: "First Product Hire",
+    title: "Building a Sustainable Business Model at DIMO",
+    subtitle: "Transforming a free product with poor unit economics into a profitable subscription business with 90% retention.",
+    highlightMetrics: [
+      { label: "6mo Retention", before: "<10%", after: "90%" },
+      { label: "Feature Adoption", before: "28%", after: "91%" },
+      { label: "Revenue", before: "$0", after: "$2.2M" },
+    ],
+    context: [
+      "After successfully breaking out of the crypto niche and tapping into the mainstream car-owner audience, DIMO had started attracting the right userbase. However, the business model hadn't evolved with the product—we weren't charging anything, which meant we were burning money on every incremental customer.",
+      "At the time, we relied on the Smartcar API to connect to users' vehicles. This created significant limitations: the data quality was insufficient to power meaningful vehicle analytics, and accuracy issues were common. Without reliable data, we couldn't deliver the kind of delightful, valuable experience that would justify a paid product.",
+      "We needed to solve two problems at once: find a way to dramatically improve data quality AND build a sustainable business model with real unit economics.",
+    ],
+    problem: [
+      "DIMO had a product problem and a business model problem.",
+      "No revenue: giving away the product for free with no path to monetization",
+      "Poor data quality: Smartcar API couldn't deliver the depth of vehicle data needed",
+      "Low engagement: only 28% of sessions used vehicle analytics features",
+      "Terrible retention: less than 10% of users retained after 6 months",
+      "We needed to figure out how to create a truly valuable product experience AND build a sustainable business model that shows revenue and profitability.",
+    ],
+    strategy: [
+      "I led a two-pronged strategy to solve both the product and business model challenges:",
+      "Upgrade the data source — Find a hardware solution that could deliver the rich vehicle data needed to create real value for users.",
+      "Implement a subscription model — Align our business model with customer value and create sustainable unit economics.",
+    ],
+    execution: [
+      {
+        title: "Deep Customer Research",
+        description: [
+          "Before making any major decisions, I needed to understand what customers really wanted—and what they would pay for.",
+          "Conducted extensive customer interviews to identify pain points and willingness to pay",
+          "Performed market research on current offerings and pricing models",
+          "Focused specifically on OBD2 dongles as a potential solution",
+          "Found that competitors successfully used a combo of upfront hardware cost + subscription model.",
+        ],
+      },
+      {
+        title: "Identifying the Right Hardware Partner",
+        description: [
+          "We identified Ruptela, an OBD2 dongle manufacturer that could build devices to our specifications.",
+          "Negotiated manufacturing partnership for custom DIMO-spec dongles",
+          "Ensured the hardware could deliver the depth of vehicle data we needed",
+          "Created a supply chain that could scale with user growth",
+          "This hardware upgrade was the foundation for delivering real product value.",
+        ],
+      },
+      {
+        title: "Launching the Subscription Model",
+        description: [
+          "We implemented a $99/year subscription tied to the hardware device.",
+          "Cut off free access to align customers with our value proposition",
+          "Priced based on competitive research and willingness-to-pay data",
+          "Created a clear value exchange: better hardware = better data = better experience",
+          "This forced us to find the right customers who truly valued what we offered.",
+        ],
+      },
+      {
+        title: "Delivering on the Product Promise",
+        description: [
+          "With better data from the OBD2 dongles, we could finally deliver meaningful vehicle analytics.",
+          "Rebuilt vehicle analytics features around the richer data set",
+          "Improved data accuracy and reliability significantly",
+          "Created features that users actually engaged with daily",
+          "The better data quality led to a dramatically better user experience.",
+        ],
+      },
+    ],
+    results: [
+      { label: "6mo App Retention", before: "<10%", after: "90%" },
+      { label: "WAU / MAU", before: "23%", after: "78%" },
+      { label: "Feature Adoption", before: "28%", after: "91%" },
+      { label: "Revenue", before: "$0", after: "$2.2M" },
+      { label: "DAU / MAU", before: "4%", after: "41%" },
+      { label: "Revenue per User", before: "$0", after: "$99/yr" },
+    ],
+    featured: true,
+  },
 ];
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
