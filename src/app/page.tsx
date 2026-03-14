@@ -17,6 +17,8 @@ export default function Home() {
       <div className="flex-grow">
         <Hero />
         
+        <ProjectGrid projects={featuredProjects} showViewAll={true} />
+        
         {/* Case Study Options for comparison */}
         <CaseStudyCarousel caseStudies={featuredCaseStudies} />
         {/* <CaseStudyTimeline caseStudies={featuredCaseStudies} /> */}
@@ -45,8 +47,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        
-        <ProjectGrid projects={featuredProjects} showViewAll={true} />
         <Toolkit />
       </div>
       

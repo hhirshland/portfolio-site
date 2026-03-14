@@ -19,7 +19,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           transition={{ duration: 0.3 }}
         >
           <Link
-            href="/projects"
+            href="/#projects"
             className="inline-flex items-center gap-2 text-slate-600 hover:text-emerald-600 transition-colors mb-8"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,24 +36,40 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           transition={{ duration: 0.5 }}
           className="bg-white/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/50 shadow-lg shadow-emerald-900/5"
         >
-          {/* Thumbnail placeholder */}
-          <div className="aspect-video bg-gradient-to-br from-emerald-100 to-sky-100 relative">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-9xl opacity-20 font-bold">
-                {project.title.charAt(0)}
-              </span>
-            </div>
-          </div>
-          
-          <div className="p-8 md:p-12">
+          <div className="p-8 md:p-12 pb-6">
             <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
               {project.title}
             </h1>
             
-            <p className="text-lg text-slate-600 mb-6">
+            <p className="text-lg text-slate-600">
               {project.description}
             </p>
-            
+          </div>
+
+          {project.demoVideo ? (
+            <div className="px-6">
+              <div className="aspect-video bg-transparent relative rounded-xl overflow-hidden">
+                <video
+                  className="w-full h-full object-contain"
+                  controls
+                  autoPlay
+                  loop
+                  playsInline
+                  src={project.demoVideo}
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="aspect-video bg-gradient-to-br from-emerald-100 to-sky-100 relative">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-9xl opacity-20 font-bold">
+                  {project.title.charAt(0)}
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div className="p-8 md:p-12 pt-6">
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mb-8">
               {project.tags.map((tag) => (

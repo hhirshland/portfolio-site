@@ -6,19 +6,21 @@ export interface Project {
   tags: string[];
   liveUrl?: string;
   githubUrl?: string;
+  demoVideo?: string;
   content: string;
   featured?: boolean;
 }
 
 export const projects: Project[] = [
   {
-    slug: "project-one",
+    slug: "grove",
     title: "Grove Insights",
     description: "AI-moderated user interview tool for qualitative user research at survey scale.",
     thumbnail: "/projects/project-1.png",
     tags: ["React", "Python", "TailwindCSS", "OpenAI"],
     liveUrl: "https://groveinsights.ai",
     githubUrl: "https://github.com/henryhirshland/groveinsights",
+    demoVideo: "/projects/grove-demo.mp4",
     content: `
 ## Overview
 
@@ -42,13 +44,14 @@ This project taught me a lot about handling real-time data at scale and integrat
     featured: true,
   },
   {
-    slug: "project-two",
+    slug: "40-ball",
     title: "40 Balls Golf Game",
     description: "A mobile app to play and score the golf game 40 Balls with large groups.",
     thumbnail: "/projects/project-2.png",
     tags: ["Next.js", "Stripe", "PostgreSQL", "Prisma"],
     liveUrl: "https://example.com",
     githubUrl: "https://github.com/henryhirshland/ecommerce",
+    demoVideo: "/projects/40ball-demo.mp4",
     content: `
 ## Overview
 
@@ -72,12 +75,13 @@ Gained deep experience with payment processing, database design, and building sc
     featured: true,
   },
   {
-    slug: "project-three",
+    slug: "thrive",
     title: "Thrive Health",
     description: "An employer sponsored wellness program that rewards employees for building healthy habits.",
     thumbnail: "/projects/project-3.png",
     tags: ["React Native", "Firebase", "Node.js", "TypeScript"],
     githubUrl: "https://github.com/henryhirshland/fitness-app",
+    demoVideo: "/projects/thrive-demo.mp4",
     content: `
 ## Overview
 
@@ -99,35 +103,6 @@ Cross-platform mobile app built with React Native, using Firebase for authentica
 Learned the intricacies of mobile development and creating engaging user experiences on small screens.
     `,
     featured: true,
-  },
-  {
-    slug: "project-four",
-    title: "Developer Portfolio Template",
-    description: "An open-source portfolio template for developers with beautiful animations and easy customization.",
-    thumbnail: "/projects/project-4.png",
-    tags: ["Next.js", "Framer Motion", "TailwindCSS"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/henryhirshland/portfolio-template",
-    content: `
-## Overview
-
-A beautiful, customizable portfolio template designed specifically for developers and designers.
-
-## Key Features
-
-- Smooth page transitions and animations
-- Dark/light mode support
-- Blog integration
-- SEO optimized
-
-## Technical Details
-
-Built with Next.js and styled with TailwindCSS. Animations powered by Framer Motion.
-
-## Learnings
-
-Focused on creating the best possible user experience while keeping the codebase clean and maintainable.
-    `,
   },
 ];
 
