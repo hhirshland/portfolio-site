@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import ConsultingBanner from "@/components/ConsultingBanner";
 import ProjectGrid from "@/components/ProjectGrid";
 import CaseStudyCarousel from "@/components/CaseStudyCarousel";
 // import CaseStudyTimeline from "@/components/CaseStudyTimeline";
@@ -16,6 +17,7 @@ export default function Home() {
       {/* Main content - grows to fill space */}
       <div className="flex-grow">
         <Hero />
+        <ConsultingBanner />
         
         <ProjectGrid projects={featuredProjects} showViewAll={true} />
         

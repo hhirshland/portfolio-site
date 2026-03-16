@@ -2,6 +2,7 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
+  descriptionLink?: { text: string; url: string };
   thumbnail: string;
   tags: string[];
   liveUrl?: string;
@@ -17,90 +18,94 @@ export const projects: Project[] = [
     title: "Grove Insights",
     description: "AI-moderated user interview tool for qualitative user research at survey scale.",
     thumbnail: "/projects/project-1.png",
-    tags: ["React", "Python", "TailwindCSS", "OpenAI"],
+    tags: ["Next.js", "OpenAI", "Supabase"],
     liveUrl: "https://groveinsights.ai",
     githubUrl: "https://github.com/henryhirshland/groveinsights",
     demoVideo: "/projects/grove-demo.mp4",
     content: `
 ## Overview
 
-This project is an AI-powered analytics dashboard that helps businesses make data-driven decisions faster.
+I've always believed the best way to solve product problems is to talk directly to users. But I've also felt the friction of manual user interviews—scheduling sessions, coordinating calendars, and spending hours each week conducting and transcribing. Grove was built to give teams the qualitative insights they need without that headache.
 
 ## Key Features
 
-- Real-time data synchronization
-- AI-powered insights and recommendations
-- Beautiful, responsive charts and visualizations
-- Role-based access control
+- AI-moderated interviews with customizable agents for each study
+- AI-powered insights that surface key learnings from individual interviews and across the full study
+- Chat interface to explore and dig deeper into interview responses
+- Full transcripts and video recordings for every session
+- Google OAuth for simple sign-in
 
 ## Technical Details
 
-Built with a React frontend and Python backend, utilizing OpenAI's API for intelligent data analysis.
+Built with Next.js and OpenAI's APIs for custom voice agents and AI-powered features. Supabase for the backend.
 
 ## Learnings
 
-This project taught me a lot about handling real-time data at scale and integrating AI into practical applications.
+Learned how to build voice-first custom agents, implement RAG for context-aware responses, and use evals to systematically improve agent performance over time.
     `,
     featured: true,
   },
   {
     slug: "40-ball",
-    title: "40 Balls Golf Game",
-    description: "A mobile app to play and score the golf game 40 Balls with large groups.",
+    title: "40 Ball",
+    description: "A mobile app to play and score the golf game 40 Ball with large groups.",
+    descriptionLink: { text: "40 Ball", url: "https://www.thefriedegg.com/articles/how-to-play-golf-game-40-score" },
     thumbnail: "/projects/project-2.png",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Prisma"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/henryhirshland/ecommerce",
+    tags: ["React Native", "Expo", "Firebase"],
+    liveUrl: "https://testflight.apple.com/join/SMAMFbCc",
     demoVideo: "/projects/40ball-demo.mp4",
     content: `
 ## Overview
 
-A complete e-commerce platform designed for small businesses to sell their products online.
+40 Ball is my favorite golf game for big groups—a great way to run a large competition that spans multiple tee times. My friends and I used to score it with a manual spreadsheet, so I built an app for us to use instead.
 
 ## Key Features
 
-- Product catalog with filtering and search
-- Secure checkout with Stripe
-- Order tracking and history
-- Admin dashboard for inventory management
+- Course finder: search for your course and pull in course data (hole handicap info)
+- Random team sorting: randomly assign teams or assign based on handicaps
+- Recent players: select players from past rounds with their handicaps saved
+- Smart scoring: automatically calculate each player's net score based on their handicaps
+- Real-time leaderboard to track the competition live
+- Track your progress to see if you're above or below the expected pace
 
 ## Technical Details
 
-Built with Next.js for the frontend and backend API routes, with PostgreSQL database managed through Prisma ORM.
+Built with React Native and Expo. Lightweight database using Firebase for real-time state management across devices.
 
 ## Learnings
 
-Gained deep experience with payment processing, database design, and building scalable web applications.
+Practice deploying mobile apps.
     `,
     featured: true,
   },
   {
     slug: "thrive",
-    title: "Thrive Health",
-    description: "An employer sponsored wellness program that rewards employees for building healthy habits.",
+    title: "Thrive",
+    description: "An identity-based habit formation app designed to help people become the best version of themselves, inspired by Atomic Habits.",
     thumbnail: "/projects/project-3.png",
-    tags: ["React Native", "Firebase", "Node.js", "TypeScript"],
-    githubUrl: "https://github.com/henryhirshland/fitness-app",
+    tags: ["React Native", "Expo", "Vapi", "Supabase"],
+    liveUrl: "https://thrive.hyperactivestudio.xyz/",
     demoVideo: "/projects/thrive-demo.mp4",
     content: `
 ## Overview
 
-A comprehensive fitness tracking application that helps users achieve their health goals.
+I designed Thrive to be the operating system for people looking to build better habits. Inspired by Atomic Habits' identity-based habit formation, we start by helping users define who they aspire to be. Then we help them identify what that person does daily and focus on doing those things each day. Thrive keeps people accountable, encourages reflection on what's working and what isn't, and builds lasting habits by focusing on what matters most—not just tracking everything.
 
 ## Key Features
 
-- Workout logging and exercise library
-- Nutrition tracking with barcode scanning
-- Progress photos and measurements
-- Social features and challenges
+- Daily habit tracking
+- Morning intentions (top 3 most important things each day)
+- Evening reflections (celebrate wins, surface identity tensions)
+- Evening accountability calls—AI calls each night to run through reflections, habits, and intentions, automatically checking things off in the app
+- Weekly AI reflections
 
 ## Technical Details
 
-Cross-platform mobile app built with React Native, using Firebase for authentication and real-time data sync.
+Mobile app built with React Native and Expo. Vapi powers the nightly phone calls. Supabase for the backend.
 
 ## Learnings
 
-Learned the intricacies of mobile development and creating engaging user experiences on small screens.
+Built familiarity deploying mobile apps and the different CI/CD workflows compared to web. Also experimented with building helpful agent skills—like a multi-variate testing skill that generates two or more variations of a feature for rapid design critique and UI exploration.
     `,
     featured: true,
   },
