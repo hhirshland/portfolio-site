@@ -19,7 +19,7 @@ export default function Home() {
         <Hero />
         <ConsultingBanner />
         
-        <ProjectGrid projects={featuredProjects} showViewAll={true} />
+        <ProjectGrid projects={featuredProjects} />
         
         {/* Case Study Options for comparison */}
         <CaseStudyCarousel caseStudies={featuredCaseStudies} />

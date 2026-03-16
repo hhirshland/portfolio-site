@@ -55,6 +55,21 @@ h1, h2, h3, h4, h5, h6 {
   background: #059669;
 }
 
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth touch scrolling for mobile carousel */
+.project-carousel {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
 /* Main content min-height to match background images */
 .main-content {
   /* Mobile: background-mobile.png is 376x3264, ratio ~8.68 */
