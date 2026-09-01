@@ -23,7 +23,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed"
         >
-          I'm an outcome driven product leader obsessed with solving user problems and building things.
+          Founder and product leader, building AI agents.
         </motion.p>
         
         <motion.div

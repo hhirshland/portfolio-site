@@ -32,6 +32,152 @@ export interface CaseStudy {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "lomita-investment-memo-agent",
+    company: "Lomita AI",
+    role: "Founder",
+    title: "Automating Investment Memo Prep with AI Agents",
+    subtitle: "Turning raw GP data rooms into validated, audit-ready investment analysis with a multi-agent workflow.",
+    highlightMetrics: [
+      { label: "Memo Prep Time", before: "4+ days", after: "~30 min" },
+      { label: "Cost per Run", before: "Days of analyst time", after: "<$15" },
+      { label: "Data Accuracy", before: "Unverified", after: ">99%" },
+    ],
+    context: [
+      "Through Lomita AI, I partnered with Selby Lane Capital, a fund-of-funds investor whose diligence process centered on a standardized \"Master Template\" workbook: one row per portfolio investment across every fund a GP has raised, plus fund-level performance data and a battery of quantitative analyses.",
+      "Building that workbook was entirely manual. Analysts combed through raw GP data rooms—Excel files and PDFs with inconsistent layouts, multi-row headers, and operating metrics scattered across dozens of columns—then hand-built the analysis on top. It took 4+ days of skilled analyst time per GP, and a single silent error (like a row offset mapping every company to its neighbor's data) could undermine the whole memo.",
+    ],
+    problem: [
+      "Investment memo prep was slow, error-prone, and impossible to fully trust.",
+      "Every GP data room had a different structure—no two extractions were the same",
+      "Manual data entry introduced silent errors that were hard to catch downstream",
+      "Analysts spent their time transcribing numbers instead of forming investment judgment",
+      "Verifying the final workbook against source files was as much work as building it",
+      "The team needed diligence-grade accuracy—every number traceable to a source document—at a fraction of the time cost.",
+    ],
+    strategy: [
+      "I designed the system around a core principle: AI does the tedious work, adversarial AI checks it, and humans stay in the loop at the decision points.",
+      "Divide and specialize — Break the workflow into narrow, single-purpose agents (extract, validate, fix, analyze) instead of one monolithic prompt.",
+      "Trust through adversarial validation — Every extraction is independently re-checked against the source files by a separate QA agent, with fix loops until the data is clean.",
+      "Human review at checkpoints, not everywhere — The investor reviews the workbook at two defined milestones rather than babysitting the whole run.",
+    ],
+    execution: [
+      {
+        title: "Standardizing the Data Model",
+        description: [
+          "Before any automation, we needed a rigorous target schema.",
+          "Defined a Master sheet schema: one row per investment with entry/exit dates, invested capital, proceeds, IRR, MOIC, and detailed operating metrics",
+          "Defined a Fund Performance schema: one row per fund vintage with net returns and DPI",
+          "Codified the team's data rules—value splits, currency conventions, edge-case handling—so every workbook comes out identical regardless of the GP's source format",
+        ],
+      },
+      {
+        title: "Multi-Agent Extraction and Validation",
+        description: [
+          "The heart of the system is a three-phase workflow of ten specialized agents.",
+          "Extraction agents read the raw data room and build the base workbook",
+          "Adversarial validator agents independently re-read the source files and cross-check every number, producing a structured issues list",
+          "A fixer agent corrects discrepancies by going back to the source data, then the validator re-checks—looping until the data is clean",
+          "Human review checkpoints gate each phase, so the investor signs off before analysis is built on top",
+        ],
+      },
+      {
+        title: "Automated Quantitative Analysis",
+        description: [
+          "Once the data is validated, the workflow generates the full analytical package automatically.",
+          "14 analysis modules produce 20+ workbook tabs: MOIC distributions, sector and region breakdowns, partner attribution, value creation bridges, and more",
+          "Fund scorecards benchmark performance against Cambridge Associates top-quartile data by strategy and vintage",
+          "Every tab is formatted in the firm's house style, ready to drop into a memo",
+        ],
+      },
+      {
+        title: "A System That Improves Itself",
+        description: [
+          "Each run makes the next one better.",
+          "A run logger tracks every phase, validation error, and fix cycle for a complete audit trail",
+          "After each run, a post-run analyst agent categorizes all errors, identifies systemic patterns, and suggests concrete improvements to the workflow",
+          "This feedback loop turned one-off automation into a compounding asset",
+        ],
+      },
+    ],
+    results: [
+      { label: "Memo Prep Time", before: "4+ days", after: "~30 min" },
+      { label: "Cost per Run", before: "Days of analyst time", after: "<$15" },
+      { label: "Data Accuracy", before: "Unverified", after: ">99%" },
+    ],
+    featured: true,
+  },
+  {
+    slug: "lomita-made-by-marge-gifting",
+    company: "Lomita AI",
+    role: "Founder",
+    title: "Building a B2B Gifting Platform for Made by Marge",
+    subtitle: "A custom, Shopify-integrated web app that opened an entirely new sales channel for a fast-growing cookie-dough brand.",
+    highlightMetrics: [
+      { label: "New Channel Revenue", before: "$0", after: ">$5,000" },
+      { label: "Bulk Ordering", before: "One by one", after: "One CSV upload" },
+      { label: "Gift Subscriptions", before: "Manual tracking", after: "Automatic" },
+    ],
+    context: [
+      "Made by Marge sells fresh-baked cookie dough direct to consumers. Margaret wanted to grow beyond her existing channels and reach businesses—opening a B2B gifting motion where a company could send cookie dough to its people at scale.",
+      "The problem was operational. Placing dozens or hundreds of orders by hand, tracking recurring gifts, and keeping it all in sync with her store simply wasn't feasible manually. She needed software that made bulk and recurring gifting effortless, and that plugged straight into the Shopify system she already runs on.",
+    ],
+    problem: [
+      "A promising sales channel was locked behind manual operations.",
+      "Bulk orders meant placing dozens or hundreds of Shopify orders one at a time",
+      "Recurring gifts—like employee birthdays—required tracking every recipient and date by hand",
+      "Any workaround outside Shopify would create a parallel process to maintain and reconcile",
+      "Without software, the B2B gifting motion couldn't exist at all.",
+    ],
+    strategy: [
+      "Instead of a generic storefront, we built the exact workflow her new buyers needed.",
+      "Make bulk and recurring effortless — One CSV upload should turn into many orders, shipped on schedule.",
+      "Integrate natively — Orders had to flow into the Shopify order-management system she already runs, with no parallel process.",
+      "Position for gifting audiences — Design the product around HR, client relations, investor relations, and individual gifters.",
+    ],
+    execution: [
+      {
+        title: "Batch Subscriptions from a CSV",
+        description: [
+          "The core flow turns a spreadsheet into a gifting program.",
+          "A business uploads a list of recipients and dates—such as employees and their birthdays",
+          "The app automatically creates a subscription for each recipient, scheduled to send on the right day",
+          "Recurring gifts ship on birthdays and key dates, automatically",
+        ],
+      },
+      {
+        title: "Bulk One-Time Orders",
+        description: [
+          "For one-off occasions, the same upload flow places everything at once.",
+          "Need to send dough to every client who closed last month? Upload the list and the app places all the orders as a single flow",
+          "No more copying orders into Shopify one at a time",
+        ],
+      },
+      {
+        title: "Native Shopify Integration",
+        description: [
+          "The app creates the batch orders programmatically inside her Shopify store.",
+          "Everything is fulfilled and tracked through her existing order-management system",
+          "No parallel process to maintain—the gifting platform and the store stay in sync by construction",
+        ],
+      },
+      {
+        title: "Positioned for New Audiences",
+        description: [
+          "The product was designed around the buyers the new channel would serve.",
+          "HR and people teams: employee birthday and milestone gifting on autopilot",
+          "Client and investor relations: thoughtful gifts to clients, portfolio companies, and investors",
+          "Individual gifters: subscription gifts for friends and family on recurring occasions",
+        ],
+      },
+    ],
+    results: [
+      { label: "New Channel Revenue", before: "$0", after: ">$5,000" },
+      { label: "Bulk Ordering", before: "One by one", after: "One CSV upload" },
+      { label: "Gift Subscriptions", before: "Manual tracking", after: "Automatic" },
+    ],
+    featured: true,
+  },
+  {
     slug: "dimo-mainstream-adoption",
     company: "DIMO",
     role: "First Product Hire",
@@ -197,84 +343,6 @@ export const caseStudies: CaseStudy[] = [
       { label: "Revenue", before: "$0", after: "$2.2M" },
       { label: "DAU / MAU", before: "4%", after: "41%" },
       { label: "Revenue per User", before: "$0", after: "$99/yr" },
-    ],
-    featured: true,
-  },
-  {
-    slug: "lomita-investment-memo-agent",
-    company: "Lomita AI",
-    role: "Founder",
-    title: "Automating Investment Memo Prep with AI Agents",
-    subtitle: "Turning raw GP data rooms into validated, audit-ready investment analysis with a multi-agent pipeline.",
-    highlightMetrics: [
-      { label: "Memo Prep Time", before: "4+ days", after: "~30 min" },
-      { label: "Cost per Run", before: "Days of analyst time", after: "<$15" },
-      { label: "Numbers Validated", before: "Spot checks", after: "100%" },
-    ],
-    context: [
-      "Through Lomita AI, I partnered with Selby Lane Capital, a fund-of-funds investor whose diligence process centered on a standardized \"Master Template\" workbook: one row per portfolio investment across every fund a GP has raised, plus fund-level performance data and a battery of quantitative analyses.",
-      "Building that workbook was entirely manual. Analysts combed through raw GP data rooms—Excel files and PDFs with inconsistent layouts, multi-row headers, and operating metrics scattered across dozens of columns—then hand-built the analysis on top. It took 4+ days of skilled analyst time per GP, and a single silent error (like a row offset mapping every company to its neighbor's data) could undermine the whole memo.",
-    ],
-    problem: [
-      "Investment memo prep was slow, error-prone, and impossible to fully trust.",
-      "Every GP data room had a different structure—no two extractions were the same",
-      "Manual data entry introduced silent errors that were hard to catch downstream",
-      "Analysts spent their time transcribing numbers instead of forming investment judgment",
-      "Verifying the final workbook against source files was as much work as building it",
-      "The team needed diligence-grade accuracy—every number traceable to a source document—at a fraction of the time cost.",
-    ],
-    strategy: [
-      "I designed the system around a core principle: AI does the tedious work, adversarial AI checks it, and humans stay in the loop at the decision points.",
-      "Divide and specialize — Break the pipeline into narrow, single-purpose agents (extract, validate, fix, analyze) instead of one monolithic prompt.",
-      "Trust through adversarial validation — Every extraction is independently re-checked against the source files by a separate QA agent, with fix loops until the data is clean.",
-      "Human review at checkpoints, not everywhere — The investor reviews the workbook at two defined milestones rather than babysitting the whole run.",
-    ],
-    execution: [
-      {
-        title: "Standardizing the Data Model",
-        description: [
-          "Before any automation, we needed a rigorous target schema.",
-          "Defined a Master sheet schema: one row per investment with entry/exit dates, invested capital, proceeds, IRR, MOIC, and detailed operating metrics",
-          "Defined a Fund Performance schema: one row per fund vintage with net returns and DPI",
-          "Codified the team's data rules—value splits, currency conventions, edge-case handling—so every workbook comes out identical regardless of the GP's source format",
-        ],
-      },
-      {
-        title: "Multi-Agent Extraction and Validation",
-        description: [
-          "The heart of the system is a three-phase pipeline of ten specialized agents.",
-          "Extraction agents read the raw data room and build the base workbook",
-          "Adversarial validator agents independently re-read the source files and cross-check every number, producing a structured issues list",
-          "A fixer agent corrects discrepancies by going back to the source data, then the validator re-checks—looping until the data is clean",
-          "Human review checkpoints gate each phase, so the investor signs off before analysis is built on top",
-        ],
-      },
-      {
-        title: "Automated Quantitative Analysis",
-        description: [
-          "Once the data is validated, the pipeline generates the full analytical package automatically.",
-          "14 analysis modules produce 20+ workbook tabs: MOIC distributions, sector and region breakdowns, partner attribution, value creation bridges, and more",
-          "Fund scorecards benchmark performance against Cambridge Associates top-quartile data by strategy and vintage",
-          "Every tab is formatted in the firm's house style, ready to drop into a memo",
-        ],
-      },
-      {
-        title: "A System That Improves Itself",
-        description: [
-          "Each run makes the next one better.",
-          "A run logger tracks every phase, validation error, and fix cycle for a complete audit trail",
-          "After each run, a post-run analyst agent categorizes all errors, identifies systemic patterns, and suggests concrete improvements to the pipeline",
-          "This feedback loop turned one-off automation into a compounding asset",
-        ],
-      },
-    ],
-    results: [
-      { label: "Memo Prep Time", before: "4+ days", after: "~30 min" },
-      { label: "Cost per Run", before: "Days of analyst time", after: "<$15" },
-      { label: "Analysis Tabs per Memo", before: "Hand-built", after: "20+ automated" },
-      { label: "Numbers Cross-Checked", before: "Spot checks", after: "100%" },
-      { label: "Specialized Agents", before: "0", after: "10" },
-      { label: "Audit Trail", before: "None", after: "Every run logged" },
     ],
     featured: true,
   },

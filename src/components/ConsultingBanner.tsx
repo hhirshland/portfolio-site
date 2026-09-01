@@ -17,7 +17,7 @@ export default function ConsultingBanner() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
           <p className="text-sm text-slate-600">
-            Currently consulting enterprises on AI adoption at{" "}
+            Currently deploying AI agents at{" "}
             <a
               href="https://www.lomita.ai"
               target="_blank"

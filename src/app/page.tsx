@@ -46,7 +46,7 @@ export default function Home() {
                   >
                     Lomita AI
                   </a>
-                  , I build production-grade AI agents for investment firms—multi-agent systems that turn days of manual analysis into minutes, with humans in the loop where it counts.
+                  , I build production-grade AI agents for investment firms: multi-agent systems that turn days of manual analysis into minutes, with humans in the loop where it counts.
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed mb-4">
                   I enjoy building (or investing in) new things, and experimenting with new technologies. I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!

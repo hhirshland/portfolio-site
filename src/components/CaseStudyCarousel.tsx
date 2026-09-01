@@ -9,6 +9,40 @@ interface CaseStudyCarouselProps {
   caseStudies: CaseStudy[];
 }
 
+function CardBody({ study }: { study: CaseStudy }) {
+  return (
+    <div className="group h-full bg-white/60 backdrop-blur-sm rounded-3xl border border-white/50 shadow-lg shadow-emerald-900/5 hover:shadow-xl hover:shadow-emerald-900/10 transition-all duration-300 overflow-hidden">
+      <div className="h-full p-8 md:p-10 flex flex-col">
+        <div className="mb-6">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">
+            {study.title}
+          </h3>
+          <p className="text-slate-600 mt-2 text-lg">
+            {study.subtitle}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4 mt-auto">
+          {study.highlightMetrics.map((metric, idx) => (
+            <div key={idx} className="bg-white/60 rounded-xl p-4 border border-white/80">
+              <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">
+                {metric.label}
+              </p>
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm text-slate-400">{metric.before}</span>
+                <svg className="w-3 h-3 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+                <span className="text-xl font-bold text-emerald-600">{metric.after}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CaseStudyCarousel({ caseStudies }: CaseStudyCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -26,12 +60,9 @@ export default function CaseStudyCarousel({ caseStudies }: CaseStudyCarouselProp
     <section className="py-20 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-800">
             Case Studies
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">
-            Deep dives into impactful product work—strategy, execution, and measurable results.
-          </p>
         </div>
 
         {/* Carousel Container */}
@@ -58,48 +89,35 @@ export default function CaseStudyCarousel({ caseStudies }: CaseStudyCarouselProp
             </>
           )}
 
-          {/* Card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Link href={`/case-studies/${currentStudy.slug}`}>
-                <div className="group bg-white/60 backdrop-blur-sm rounded-3xl border border-white/50 shadow-lg shadow-emerald-900/5 hover:shadow-xl hover:shadow-emerald-900/10 transition-all duration-300 overflow-hidden">
-                  <div className="p-8 md:p-10">
-                    <div className="mb-6">
-                      <h3 className="text-2xl md:text-3xl font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">
-                        {currentStudy.title}
-                      </h3>
-                      <p className="text-slate-600 mt-2 text-lg">
-                        {currentStudy.subtitle}
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-4">
-                      {currentStudy.highlightMetrics.map((metric, idx) => (
-                        <div key={idx} className="bg-white/60 rounded-xl p-4 border border-white/80">
-                          <p className="text-xs font-medium text-slate-500 uppercase tracking-wide mb-2">
-                            {metric.label}
-                          </p>
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-sm text-slate-400">{metric.before}</span>
-                            <svg className="w-3 h-3 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                            <span className="text-xl font-bold text-emerald-600">{metric.after}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          </AnimatePresence>
+          {/* Card — invisible copies of every study stack in the same grid
+              cell so the container always matches the tallest card's height */}
+          <div className="grid">
+            {caseStudies.map((study) => (
+              <div
+                key={study.slug}
+                aria-hidden="true"
+                className="[grid-area:1/1] invisible pointer-events-none"
+              >
+                <CardBody study={study} />
+              </div>
+            ))}
+            <div className="[grid-area:1/1]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
+                  className="h-full"
+                >
+                  <Link href={`/case-studies/${currentStudy.slug}`} className="block h-full">
+                    <CardBody study={currentStudy} />
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
 
           {/* Dots */}
           {caseStudies.length > 1 && (

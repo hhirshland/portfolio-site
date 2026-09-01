@@ -1,17 +1,16 @@
 import { NextResponse } from "next/server";
+import {
+  AVG_COST,
+  CRYPTO_COINGECKO_IDS,
+  FALLBACK_STOCKS,
+  PUBLIC_TICKERS,
+  totalReturnPercent,
+  type StockQuote,
+} from "@/data/publicHoldings";
 
-interface StockData {
-  symbol: string;
-  name: string;
-  price: number;
-  change: number;
-  changePercent: number;
-}
-
-// Fetch stock quote from Finnhub
-async function fetchStockQuote(symbol: string, name: string): Promise<StockData | null> {
+async function fetchStockQuote(symbol: string, name: string): Promise<StockQuote | null> {
   const apiKey = process.env.FINNHUB_API_KEY;
-  
+
   if (!apiKey) {
     console.error("FINNHUB_API_KEY not found");
     return null;
@@ -20,22 +19,26 @@ async function fetchStockQuote(symbol: string, name: string): Promise<StockData 
   try {
     const response = await fetch(
       `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${apiKey}`,
-      { next: { revalidate: 60 } } // Cache for 60 seconds
+      { next: { revalidate: 60 } },
     );
-    
+
     if (!response.ok) {
       throw new Error(`Finnhub API error: ${response.status}`);
     }
-    
+
     const data = await response.json();
-    
-    // Finnhub returns: c (current), d (change), dp (percent change), h (high), l (low), o (open), pc (previous close)
+    if (!data.c) return null;
+
+    const avgCost = AVG_COST[symbol] ?? null;
     return {
       symbol,
       name,
       price: data.c,
-      change: data.d,
-      changePercent: data.dp,
+      change: data.d ?? 0,
+      changePercent: data.dp ?? 0,
+      avgCost,
+      totalReturnPercent: totalReturnPercent(data.c, avgCost),
+      private: false,
     };
   } catch (error) {
     console.error(`Error fetching ${symbol}:`, error);
@@ -43,81 +46,92 @@ async function fetchStockQuote(symbol: string, name: string): Promise<StockData 
   }
 }
 
-// Fetch crypto prices from CoinGecko (free, no API key needed)
-async function fetchCryptoPrices(): Promise<StockData[]> {
+async function fetchCryptoPrices(): Promise<StockQuote[]> {
+  const cryptos = PUBLIC_TICKERS.filter((ticker) => ticker.kind === "crypto");
+  const ids = cryptos
+    .map((ticker) => CRYPTO_COINGECKO_IDS[ticker.symbol])
+    .filter(Boolean)
+    .join(",");
+
+  if (!ids) return [];
+
   try {
     const response = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true",
-      { next: { revalidate: 60 } } // Cache for 60 seconds
+      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`,
+      { next: { revalidate: 60 } },
     );
-    
+
     if (!response.ok) {
       throw new Error(`CoinGecko API error: ${response.status}`);
     }
-    
+
     const data = await response.json();
-    
-    return [
-      {
-        symbol: "BTC",
-        name: "Bitcoin",
-        price: data.bitcoin.usd,
-        change: 0, // CoinGecko doesn't provide absolute change in simple endpoint
-        changePercent: data.bitcoin.usd_24h_change,
-      },
-      {
-        symbol: "ETH",
-        name: "Ethereum",
-        price: data.ethereum.usd,
-        change: 0,
-        changePercent: data.ethereum.usd_24h_change,
-      },
-    ];
+
+    return cryptos.flatMap((ticker) => {
+      const geckoId = CRYPTO_COINGECKO_IDS[ticker.symbol];
+      const quote = geckoId ? data[geckoId] : undefined;
+      if (!quote?.usd) return [];
+
+      const avgCost = AVG_COST[ticker.symbol] ?? null;
+      return [
+        {
+          symbol: ticker.symbol,
+          name: ticker.name,
+          price: quote.usd,
+          change: 0,
+          changePercent: quote.usd_24h_change ?? 0,
+          avgCost,
+          totalReturnPercent: totalReturnPercent(quote.usd, avgCost),
+          private: false,
+        },
+      ];
+    });
   } catch (error) {
     console.error("Error fetching crypto prices:", error);
     return [];
   }
 }
 
-// Stock symbols with their display names
-const STOCKS = [
-  { symbol: "NVDA", name: "NVIDIA" },
-  { symbol: "TSLA", name: "Tesla" },
-  { symbol: "GOOGL", name: "Google" },
-  { symbol: "AMZN", name: "Amazon" },
-  { symbol: "MU", name: "Micron" },
-  { symbol: "VOO", name: "S&P 500" },
-  { symbol: "TSM", name: "TSMC" },
-  { symbol: "COIN", name: "Coinbase" },
-  { symbol: "HOOD", name: "Robinhood" },
-  { symbol: "META", name: "Meta" },
-  { symbol: "IREN", name: "Iris Energy" },
-  { symbol: "MP", name: "MP Materials" },
-  { symbol: "INTC", name: "Intel" },
-  { symbol: "VTI", name: "Total Market" },
-  { symbol: "AAPL", name: "Apple" },
-];
-
 export async function GET() {
   try {
-    // Fetch all data in parallel
-    const [cryptoData, ...stockResults] = await Promise.all([
+    const [cryptoData, ...equityResults] = await Promise.all([
       fetchCryptoPrices(),
-      ...STOCKS.map(({ symbol, name }) => fetchStockQuote(symbol, name)),
+      ...PUBLIC_TICKERS.filter((ticker) => ticker.kind === "equity").map((ticker) =>
+        fetchStockQuote(ticker.symbol, ticker.name),
+      ),
     ]);
 
-    // Combine results, filtering out any null values
-    const stocks: StockData[] = [
-      ...cryptoData,
-      ...stockResults,
-    ].filter((stock): stock is StockData => stock !== null);
+    const liveBySymbol = new Map<string, StockQuote>();
+    for (const quote of [...cryptoData, ...equityResults]) {
+      if (quote) liveBySymbol.set(quote.symbol, quote);
+    }
+
+    const stocks: StockQuote[] = PUBLIC_TICKERS.map((ticker) => {
+      const live = liveBySymbol.get(ticker.symbol);
+      const avgCost = AVG_COST[ticker.symbol] ?? null;
+
+      if (live && live.price > 0) {
+        return {
+          symbol: live.symbol,
+          name: ticker.name,
+          price: live.price,
+          change: live.change,
+          changePercent: live.changePercent,
+          avgCost,
+          totalReturnPercent: totalReturnPercent(live.price, avgCost),
+          private: ticker.kind === "private",
+        };
+      }
+
+      return FALLBACK_STOCKS.find((stock) => stock.symbol === ticker.symbol) ?? null;
+    }).filter((stock): stock is StockQuote => stock !== null);
 
     return NextResponse.json({ stocks });
   } catch (error) {
     console.error("Error in stocks API:", error);
     return NextResponse.json(
       { error: "Failed to fetch stock data" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
