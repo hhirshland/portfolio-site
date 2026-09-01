@@ -14,6 +14,36 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "lomita-os",
+    title: "Lomita OS",
+    description: "A supervised AI command center for relationship-driven investment teams—agents do the work, humans stay in control.",
+    thumbnail: "/projects/lomita-os.jpg",
+    tags: ["Next.js", "Supabase", "Vercel AI SDK", "Gmail API"],
+    liveUrl: "https://www.lomita.ai",
+    content: `
+## Overview
+
+Lomita OS is the product behind Lomita AI: a supervised command center where investment teams manage a fleet of AI agents. The first vertical slice is an outbound email agent that moves a contact from CRM selection through grounded draft generation, human edits or feedback-driven revisions, and an explicit Gmail-approved send—then evaluates the first draft against the exact version that was sent, so the agent measurably improves over time.
+
+## Key Features
+
+- CRM workspace with company, relationship, and next-action context, plus on-demand AI contact enrichment
+- Grounded email drafting with immutable draft versions—every edit and feedback turn is preserved
+- Human-in-the-loop review queue: the model has no send tool, and every send requires explicit approval
+- Writing profile and evidence-backed rules learned from your own sent email history
+- Deterministic evals comparing each first draft to the final sent version
+
+## Technical Details
+
+Built with Next.js and the Vercel AI SDK via AI Gateway. Supabase powers the multi-tenant backend with row-level security and encrypted Gmail history. Langfuse handles observability, with AI inputs and outputs omitted from hosted traces.
+
+## Learnings
+
+Building agents for finance taught me that safety is the product: append-only audit records, AES-256-GCM encryption for mailbox data, server-side compare-and-swap checks on every send, and keeping the model physically unable to send email are what make an agent system professionals can actually trust.
+    `,
+    featured: true,
+  },
+  {
     slug: "thrive",
     title: "Thrive",
     description: "An identity-based habit formation app designed to help people become the best version of themselves, inspired by Atomic Habits.",
@@ -51,7 +81,7 @@ Built familiarity deploying mobile apps and the different CI/CD workflows compar
     thumbnail: "/projects/project-1.png",
     tags: ["Next.js", "OpenAI", "Supabase"],
     liveUrl: "https://groveinsights.ai",
-    githubUrl: "https://github.com/henryhirshland/groveinsights",
+    githubUrl: "https://github.com/hhirshland/groveinsights",
     demoVideo: "/projects/grove-demo.mp4",
     content: `
 ## Overview

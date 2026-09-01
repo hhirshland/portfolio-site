@@ -25,8 +25,12 @@ export async function generateMetadata({ params }: CaseStudyPageProps) {
   }
   
   return {
-    title: `${caseStudy.title} | Henry Hirshland`,
+    title: caseStudy.title,
     description: caseStudy.subtitle,
+    openGraph: {
+      title: caseStudy.title,
+      description: caseStudy.subtitle,
+    },
   };
 }
 

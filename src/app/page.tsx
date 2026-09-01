@@ -34,11 +34,22 @@ export default function Home() {
               </h2>
               <div className="prose prose-slate max-w-none">
                 <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                  I&apos;m a builder with 6+ years of experience doing product at startups.  I love rolling up my sleeves, tackling big problems, and building systems that help my team deliver value quickly.  I'm experienced in driving product strategy, building out product analytics, and experimentation.
-                    
+                  I&apos;m a builder with 6+ years of experience doing product at startups. I love rolling up my sleeves, tackling big problems, and building systems that help my team deliver value quickly. I&apos;m experienced in driving product strategy, building out product analytics, and experimentation.
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                  I enjoy building (or investing in) new things, and experimenting with new technologies. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
+                  These days I&apos;m focused on AI. Through{" "}
+                  <a
+                    href="https://www.lomita.ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-emerald-600 hover:text-emerald-700 underline underline-offset-2 transition-colors"
+                  >
+                    Lomita AI
+                  </a>
+                  , I build production-grade AI agents for investment firms—multi-agent systems that turn days of manual analysis into minutes, with humans in the loop where it counts.
+                </p>
+                <p className="text-lg text-slate-600 leading-relaxed mb-4">
+                  I enjoy building (or investing in) new things, and experimenting with new technologies. I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
                 When I&apos;m unplugged, you can find me playing golf, tennis, skiing, hiking, playing poker or catan, cooking, exercising, reading a sci-fi book, or watching the Patriots.

@@ -2,8 +2,9 @@ import ProjectGrid from "@/components/ProjectGrid";
 import { projects } from "@/data/projects";
 
 export const metadata = {
-  title: "Projects | Henry Hirshland",
-  description: "A collection of projects I've worked on.",
+  title: "Projects",
+  description:
+    "Side projects and AI products built by Henry Hirshland—from an AI command center for investment teams to mobile apps for golf and habit building.",
 };
 
 export default function ProjectsPage() {

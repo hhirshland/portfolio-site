@@ -19,12 +19,12 @@ export default function ConsultingBanner() {
           <p className="text-sm text-slate-600">
             Currently consulting enterprises on AI adoption at{" "}
             <a
-              href="https://hyperactivestudio.xyz"
+              href="https://www.lomita.ai"
               target="_blank"
               rel="noopener noreferrer"
               className="font-medium text-emerald-600 hover:text-emerald-700 underline underline-offset-2 transition-colors"
             >
-              Hyperactive Studio
+              Lomita AI
             </a>
           </p>
         </div>

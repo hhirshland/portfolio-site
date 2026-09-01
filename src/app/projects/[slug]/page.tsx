@@ -25,8 +25,13 @@ export async function generateMetadata({ params }: ProjectPageProps) {
   }
   
   return {
-    title: `${project.title} | Henry Hirshland`,
+    title: project.title,
     description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      images: [{ url: project.thumbnail }],
+    },
   };
 }
 

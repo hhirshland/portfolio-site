@@ -200,6 +200,84 @@ export const caseStudies: CaseStudy[] = [
     ],
     featured: true,
   },
+  {
+    slug: "lomita-investment-memo-agent",
+    company: "Lomita AI",
+    role: "Founder",
+    title: "Automating Investment Memo Prep with AI Agents",
+    subtitle: "Turning raw GP data rooms into validated, audit-ready investment analysis with a multi-agent pipeline.",
+    highlightMetrics: [
+      { label: "Memo Prep Time", before: "4+ days", after: "~30 min" },
+      { label: "Cost per Run", before: "Days of analyst time", after: "<$15" },
+      { label: "Numbers Validated", before: "Spot checks", after: "100%" },
+    ],
+    context: [
+      "Through Lomita AI, I partnered with Selby Lane Capital, a fund-of-funds investor whose diligence process centered on a standardized \"Master Template\" workbook: one row per portfolio investment across every fund a GP has raised, plus fund-level performance data and a battery of quantitative analyses.",
+      "Building that workbook was entirely manual. Analysts combed through raw GP data rooms—Excel files and PDFs with inconsistent layouts, multi-row headers, and operating metrics scattered across dozens of columns—then hand-built the analysis on top. It took 4+ days of skilled analyst time per GP, and a single silent error (like a row offset mapping every company to its neighbor's data) could undermine the whole memo.",
+    ],
+    problem: [
+      "Investment memo prep was slow, error-prone, and impossible to fully trust.",
+      "Every GP data room had a different structure—no two extractions were the same",
+      "Manual data entry introduced silent errors that were hard to catch downstream",
+      "Analysts spent their time transcribing numbers instead of forming investment judgment",
+      "Verifying the final workbook against source files was as much work as building it",
+      "The team needed diligence-grade accuracy—every number traceable to a source document—at a fraction of the time cost.",
+    ],
+    strategy: [
+      "I designed the system around a core principle: AI does the tedious work, adversarial AI checks it, and humans stay in the loop at the decision points.",
+      "Divide and specialize — Break the pipeline into narrow, single-purpose agents (extract, validate, fix, analyze) instead of one monolithic prompt.",
+      "Trust through adversarial validation — Every extraction is independently re-checked against the source files by a separate QA agent, with fix loops until the data is clean.",
+      "Human review at checkpoints, not everywhere — The investor reviews the workbook at two defined milestones rather than babysitting the whole run.",
+    ],
+    execution: [
+      {
+        title: "Standardizing the Data Model",
+        description: [
+          "Before any automation, we needed a rigorous target schema.",
+          "Defined a Master sheet schema: one row per investment with entry/exit dates, invested capital, proceeds, IRR, MOIC, and detailed operating metrics",
+          "Defined a Fund Performance schema: one row per fund vintage with net returns and DPI",
+          "Codified the team's data rules—value splits, currency conventions, edge-case handling—so every workbook comes out identical regardless of the GP's source format",
+        ],
+      },
+      {
+        title: "Multi-Agent Extraction and Validation",
+        description: [
+          "The heart of the system is a three-phase pipeline of ten specialized agents.",
+          "Extraction agents read the raw data room and build the base workbook",
+          "Adversarial validator agents independently re-read the source files and cross-check every number, producing a structured issues list",
+          "A fixer agent corrects discrepancies by going back to the source data, then the validator re-checks—looping until the data is clean",
+          "Human review checkpoints gate each phase, so the investor signs off before analysis is built on top",
+        ],
+      },
+      {
+        title: "Automated Quantitative Analysis",
+        description: [
+          "Once the data is validated, the pipeline generates the full analytical package automatically.",
+          "14 analysis modules produce 20+ workbook tabs: MOIC distributions, sector and region breakdowns, partner attribution, value creation bridges, and more",
+          "Fund scorecards benchmark performance against Cambridge Associates top-quartile data by strategy and vintage",
+          "Every tab is formatted in the firm's house style, ready to drop into a memo",
+        ],
+      },
+      {
+        title: "A System That Improves Itself",
+        description: [
+          "Each run makes the next one better.",
+          "A run logger tracks every phase, validation error, and fix cycle for a complete audit trail",
+          "After each run, a post-run analyst agent categorizes all errors, identifies systemic patterns, and suggests concrete improvements to the pipeline",
+          "This feedback loop turned one-off automation into a compounding asset",
+        ],
+      },
+    ],
+    results: [
+      { label: "Memo Prep Time", before: "4+ days", after: "~30 min" },
+      { label: "Cost per Run", before: "Days of analyst time", after: "<$15" },
+      { label: "Analysis Tabs per Memo", before: "Hand-built", after: "20+ automated" },
+      { label: "Numbers Cross-Checked", before: "Spot checks", after: "100%" },
+      { label: "Specialized Agents", before: "0", after: "10" },
+      { label: "Audit Trail", before: "None", after: "Every run logged" },
+    ],
+    featured: true,
+  },
 ];
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
