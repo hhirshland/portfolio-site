@@ -1,31 +1,29 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function AnimatedBackground() {
+  const { scrollYProgress } = useScroll();
+  // Slides the image so its top meets the page top and its bottom meets the page bottom, at any page height.
+  const transform = useTransform(
+    scrollYProgress,
+    (p) => `translate3d(0, calc(${-p * 100}% + ${p * 100}vh), 0)`
+  );
+
   return (
     <>
-      {/* Background color that shows after image ends - matches high alpine */}
       <div className="fixed inset-0 -z-20 bg-gradient-to-b from-[#e0f0ff] to-[#f5faff]" />
-      
-      {/* Scrolling background image - different images for mobile vs desktop */}
-      <div className="absolute top-0 left-0 right-0 -z-10">
-        {/* Mobile background - shown on small screens */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/background-mobile.png"
-          alt=""
-          className="w-full h-auto md:hidden"
-        />
-        {/* Desktop background - shown on medium screens and up */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/background.png"
-          alt=""
-          className="w-full h-auto hidden md:block"
-        />
-        {/* Gradient fade at the bottom - matches high alpine */}
-        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#f5faff] to-transparent" />
+
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+        <picture>
+          <source media="(min-width: 768px)" srcSet="/background.webp" />
+          <motion.img
+            src="/background-mobile.webp"
+            alt=""
+            className="block w-full h-auto will-change-transform"
+            style={{ transform }}
+          />
+        </picture>
       </div>
       
       {/* Fixed floating clouds - subtle movement in viewport */}

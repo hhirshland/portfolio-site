@@ -3,14 +3,18 @@ import ConsultingBanner from "@/components/ConsultingBanner";
 import ProjectGrid from "@/components/ProjectGrid";
 import CaseStudyCarousel from "@/components/CaseStudyCarousel";
 // import CaseStudyTimeline from "@/components/CaseStudyTimeline";
-import Toolkit from "@/components/Toolkit";
 import StockTicker from "@/components/StockTicker";
+import Library from "@/components/library/Library";
 import { getFeaturedProjects } from "@/data/projects";
 import { getFeaturedCaseStudies } from "@/data/caseStudies";
+import { getLibraryBooks } from "@/lib/goodreads";
 
-export default function Home() {
+export const revalidate = 3600;
+
+export default async function Home() {
   const featuredProjects = getFeaturedProjects();
   const featuredCaseStudies = getFeaturedCaseStudies();
+  const libraryBooks = await getLibraryBooks();
 
   return (
     <>
@@ -49,18 +53,16 @@ export default function Home() {
                   , I build production-grade AI agents for investment firms: multi-agent systems that turn days of manual analysis into minutes, with humans in the loop where it counts.
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed mb-4">
-                  I enjoy building (or investing in) new things, and experimenting with new technologies. I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
+                  I love building (and investing in) new things and experimenting with new technologies. I&apos;m always open to discussing business strategy and exploring new ideas. Feel free to reach out!
                 </p>
                 <p className="text-lg text-slate-600 leading-relaxed">
-                When I&apos;m unplugged, you can find me playing golf, tennis, skiing, hiking, playing poker or catan, cooking, exercising, reading a sci-fi book, or watching the Patriots.
-
-
+                  When I&apos;m unplugged, you can find me playing golf, tennis, skiing, hiking, playing poker or catan, cooking, exercising, reading a sci-fi book, or watching the Patriots. Fun fact: I was once ranked top 50 globally in online Catan on the Colonist site.
                 </p>
               </div>
             </div>
           </div>
         </section>
-        <Toolkit />
+        <Library books={libraryBooks} />
       </div>
       
       {/* Stock Ticker */}
